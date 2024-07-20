@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_css %} <link rel="stylesheet" href="{% static "css/home.css" %}"> {% endblock page_css %}
+{% block page_title %}Docspert - Home{% endblock page_title %}
+{% block page_content %}
+<div class="container mt-5" style="background-color: #f8f9fa;">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Welcome to Docspert</h1>
+        <p class="lead">Your one-stop solution for managing fund transfers with ease.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mb-4 mx-auto">
+            <div class="card border-0 shadow">
+                <img src="{% static "images/list.jpg" %}" class="card-img-top" alt="Account List">
+                <div class="card-body text-center">
+                    <a href="{% url 'transfer:account-list' %}" class="btn btn-primary btn-block">Account List</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-4 mx-auto">
+            <div class="card border-0 shadow">
+                <img src="{% static "images/upload.jpg" %}" class="card-img-top" alt="Upload Accounts">
+                <div class="card-body text-center">
+                    <a href="{% url 'transfer:file-upload' %}" class="btn btn-secondary btn-block">Upload Accounts</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4 mx-auto">
+            <div class="card border-0 shadow">
+                <img src="{% static "images/transfer.jpg" %}" class="card-img-top" alt="Transfer Funds">
+                <div class="card-body text-center">
+                    <a href="{% url 'transfer:fund-transfer' %}" class="btn btn-success btn-block">Transfer Funds</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock page_content %}

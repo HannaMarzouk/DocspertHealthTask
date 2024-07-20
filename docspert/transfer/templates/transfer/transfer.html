@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_css %} <link rel="stylesheet" href="{% static "css/transfer.css" %}"> {% endblock page_css %}
+{% block page_title %}Docspert - Transfer Funds{% endblock page_title %}
+{% block page_content %}
+    <div class="container">
+        <a class="home-link" href="{% url 'transfer:home' %}">Home</a>
+        <h1>Transfer Funds</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error">
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit">Transfer</button>
+        </form>
+    </div>
+{% endblock page_content %}

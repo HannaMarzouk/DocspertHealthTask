@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_css %} <link rel="stylesheet" href="{% static "css/account_details.css" %}"> {% endblock page_css %}
+{% block page_title %}Docspert - {{ account.name }}{% endblock page_title %}
+{% block page_content %}
+<div class="container">
+    <a class="home-link" href="{% url 'transfer:home' %}">Home</a>
+    <h1>{{ account.name }}</h1>
+    <p>Balance: ${{ account.balance }}</p>
+    <div class="transactions-container">
+        <div class="transaction-column">
+            <h2>Outgoing Transactions</h2>
+            <ul>
+                {% for transaction in sent_transactions %}
+                    <li>
+                        <div class="transaction-details">
+                            To: {{ transaction.receive.name }}, Amount: ${{ transaction.amount }}, Date: {{ transaction.timestamp }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="transaction-column">
+            <h2>Incoming Transactions</h2>
+            <ul>
+                {% for transaction in received_transactions %}
+                    <li>
+                        <div class="transaction-details">
+                            From: {{ transaction.sender.name }}, Amount: ${{ transaction.amount }}, Date: {{ transaction.timestamp }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock page_content %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_css %} <link rel="stylesheet" href="{% static "css/account_list.css" %}"> {% endblock page_css %}
+{% block page_title %}Docspert - Account List{% endblock page_title %}
+{% block page_content %}
+    <div class="container">
+        <a href="{% url 'transfer:home' %}">Home</a>
+        <h1>Account List</h1>
+            <form method="get" class="filter-form">
+                <input style="display: inline" type="text" name="name" placeholder="Account Name" value="{{ request.GET.name }}">
+                <input  style="display: inline" type="number" name="min_balance" step="0.01" placeholder="Min Balance" value="{{ request.GET.min_balance }}">
+                <input  style="display: inline" type="number" name="max_balance" step="0.01" placeholder="Max Balance" value="{{ request.GET.max_balance }}">
+                <button type="submit"  style="display: inline">Filter</button>
+            </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>UUID</th>
+                    <th>Name</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form action="{% url 'transfer:add-account' %}" method="post">
+                        <td><button type="submit">Add Account</button></td>
+                        <td>{{ form.name }}</td>
+                        <td>{{ form.balance }}</td>
+                    </form>
+                </tr>
+                {% for account in accounts %}
+                <tr>
+                    <td><a href="{% url 'transfer:account-detail' account.uuid %}">{{ account.uuid }}</a></td>
+                    <td><a href="{% url 'transfer:account-detail' account.uuid %}">{{ account.name }}</a></td>
+                    <td><a href="{% url 'transfer:account-detail' account.uuid %}">{{ account.balance }}</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No accounts found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="{% url 'transfer:file-upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file">
+            <button type="submit">Import</button>
+        </form>
+    </div>
+{% endblock page_content %}

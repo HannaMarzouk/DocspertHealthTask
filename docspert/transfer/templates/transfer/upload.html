@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_css %} <link rel="stylesheet" href="{% static "css/Upload.css" %}"> {% endblock page_css %}
+{% block page_title %}Docspert - Upload Accounts{% endblock page_title %}
+{% block page_content %}
+    <div class="container">
+        <a class="home-link" href="{% url 'transfer:home' %}">Home</a>
+        <h1>Upload Accounts</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+{% endblock page_content %}

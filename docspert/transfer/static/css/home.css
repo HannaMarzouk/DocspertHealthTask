@@ -1,0 +1,29 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    background-color: antiquewhite;
+}
+
+h1, .lead {
+    color: #343a40;
+}
+
+.card {
+    border: 15px solid black;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    height: 350px;
+    object-fit: cover;
+}
+
+.btn-block {
+    font-size: 1.2em;
+    padding: 10px;
+    margin-bottom: 1rem;
+}
